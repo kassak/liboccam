@@ -1,3 +1,3 @@
 #pragma once
-#include "occam/log.h"
+#include "occam/logger.h"
 #include "occam/allocator.h"
