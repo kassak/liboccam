@@ -11,7 +11,7 @@ typedef enum occam_log_level_tag
 } occam_log_level_t;
 
 typedef
-   void (*occam_log_handler_t)(void * userdata,
+   void (*occam_log_handler_t)(const void * userdata,
              const occam_log_level_t level,
              const char * area,
              const char * fmt,
@@ -20,7 +20,7 @@ typedef
 typedef struct occam_logger_tag
 {
    occam_log_handler_t handler;
-   void *userdata;
+   const void *userdata;
 } occam_logger_t;
 
 static const char * const _occam_log_level_name[OCCAM_LOG_LEVEL_COUNT] = {
@@ -33,13 +33,13 @@ static const char * const _occam_log_level_name[OCCAM_LOG_LEVEL_COUNT] = {
 //TODO: add some cases
 #define OCCAM_CURRENT_FUNCTION __func__
 
-void occam_logv(occam_logger_t * log, occam_log_level_t lvl,
+void occam_logv(const occam_logger_t * log, occam_log_level_t lvl,
    const char * area, const char * fmt, va_list args)
 {
    if(log)
       log->handler(log->userdata, lvl, area, fmt, args);
 }
-void occam_log(occam_logger_t * log, occam_log_level_t lvl,
+void occam_log(const occam_logger_t * log, occam_log_level_t lvl,
    const char * area, const char * fmt, ...)
 {
    va_list args;
