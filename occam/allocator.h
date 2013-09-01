@@ -8,6 +8,11 @@ typedef struct occam_allocator_tag
     void *userdata;
 } occam_allocator_t;
 
-#define occam_alloc(A, SZ) ((A) ? (A)->alloc(SZ, (A)->userdata) : malloc(SZ))
-#define occam_realloc(A, P, SZ) ((A) ? (A)->realloc(P, SZ, (A)->userdata) : realloc(P, SZ))
-#define occam_free(A, P) ((A) ?(A)->free(P, (A)->userdata) : free(P))
+#ifdef OCCAM_STANDARD_ALLOCATOR
+#include<stdlib.h>
+static const occam_allocator_t occam_standard_allocator = {malloc, free, realloc};
+#endif
+
+#define occam_alloc(A, SZ) ((A)->alloc(SZ, (A)->userdata))
+#define occam_realloc(A, P, SZ) ((A)->realloc(P, SZ, (A)->userdata))
+#define occam_free(A, P) ((A)->free(P, (A)->userdata))
