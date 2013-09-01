@@ -42,7 +42,7 @@ void occam_logv(occam_logger_t * log, occam_log_level_t lvl,
 void occam_log(occam_logger_t * log, occam_log_level_t lvl,
    const char * area, const char * fmt, ...)
 {
-   va_list ap;
+   va_list args;
    va_start(args, fmt);
    occam_logv(log, lvl, area, fmt, args);
    va_end(args);
