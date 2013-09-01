@@ -1,4 +1,5 @@
 #pragma once
+#include <stdarg.h>
 
 typedef enum occam_log_level_tag
 {
@@ -33,13 +34,13 @@ static const char * const _occam_log_level_name[OCCAM_LOG_LEVEL_COUNT] = {
 //TODO: add some cases
 #define OCCAM_CURRENT_FUNCTION __func__
 
-void occam_logv(occam_logger_t * log, occam_log_level_t lvl,
+static inline void occam_logv(const occam_logger_t * log, occam_log_level_t lvl,
    const char * area, const char * fmt, va_list args)
 {
    if(log)
       log->handler(log->userdata, lvl, area, fmt, args);
 }
-void occam_log(occam_logger_t * log, occam_log_level_t lvl,
+static inline void occam_log(const occam_logger_t * log, occam_log_level_t lvl,
    const char * area, const char * fmt, ...)
 {
    va_list args;
