@@ -10,7 +10,24 @@ typedef struct occam_allocator_tag
 
 #ifdef OCCAM_STANDARD_ALLOCATOR
 #include<stdlib.h>
-static const occam_allocator_t occam_standard_allocator = {malloc, free, realloc};
+static void* _occam_malloc(size_t sz, void * dummy)
+{
+   return malloc(sz);
+}
+static void* _occam_realloc(void* mem, size_t sz, void * dummy)
+{
+   return realloc(mem, sz);
+}
+static void _occam_free(void * mem, void * dummy)
+{
+   free(mem);
+}
+static const occam_allocator_t occam_standard_allocator = {
+   _occam_malloc,
+   _occam_free,
+   _occam_realloc,
+   NULL
+};
 #endif
 
 #define occam_alloc(A, SZ) ((A)->alloc(SZ, (A)->userdata))

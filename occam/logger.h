@@ -3,6 +3,7 @@
 
 typedef enum occam_log_level_tag
 {
+   OCCAM_LOG_LEVEL_TRACE,
    OCCAM_LOG_LEVEL_DEBUG,
    OCCAM_LOG_LEVEL_INFO,
    OCCAM_LOG_LEVEL_WARN,
@@ -25,6 +26,7 @@ typedef struct occam_logger_tag
 } occam_logger_t;
 
 static const char * const _occam_log_level_name[OCCAM_LOG_LEVEL_COUNT] = {
+   "TRACE",
    "DEBUG",
    "INFO",
    "WARN",
