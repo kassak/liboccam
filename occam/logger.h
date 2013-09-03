@@ -52,13 +52,14 @@ static inline void occam_log(const occam_logger_t * log, occam_log_level_t lvl,
 }
 
 #define occam_current_log(LOG, LVL, FMT, ...) occam_log(LOG, LVL, OCCAM_CURRENT_FUNCTION, FMT, __VA_ARGS__)
-#define occam_log_d(LOG, FMT, ...) occam_log(LOG, OCCAM_LOG_LEVEL_DEBUG, FMT, __VA_ARGS__)
-#define occam_log_i(LOG, FMT, ...) occam_log(LOG, OCCAM_LOG_LEVEL_INFO,  FMT, __VA_ARGS__)
-#define occam_log_w(LOG, FMT, ...) occam_log(LOG, OCCAM_LOG_LEVEL_WARN,  FMT, __VA_ARGS__)
-#define occam_log_e(LOG, FMT, ...) occam_log(LOG, OCCAM_LOG_LEVEL_ERROR, FMT, __VA_ARGS__)
-#define occam_logs_d(LOG, FMT) occam_log(LOG, OCCAM_LOG_LEVEL_DEBUG, FMT)
-#define occam_logs_i(LOG, FMT) occam_log(LOG, OCCAM_LOG_LEVEL_INFO,  FMT)
-#define occam_logs_w(LOG, FMT) occam_log(LOG, OCCAM_LOG_LEVEL_WARN,  FMT)
-#define occam_logs_e(LOG, FMT) occam_log(LOG, OCCAM_LOG_LEVEL_ERROR, FMT)
+#define occam_current_logs(LOG, LVL, FMT, ...) occam_log(LOG, LVL, OCCAM_CURRENT_FUNCTION, FMT)
+#define occam_log_d(LOG, FMT, ...) occam_current_log(LOG, OCCAM_LOG_LEVEL_DEBUG, FMT, __VA_ARGS__)
+#define occam_log_i(LOG, FMT, ...) occam_current_log(LOG, OCCAM_LOG_LEVEL_INFO,  FMT, __VA_ARGS__)
+#define occam_log_w(LOG, FMT, ...) occam_current_log(LOG, OCCAM_LOG_LEVEL_WARN,  FMT, __VA_ARGS__)
+#define occam_log_e(LOG, FMT, ...) occam_current_log(LOG, OCCAM_LOG_LEVEL_ERROR, FMT, __VA_ARGS__)
+#define occam_logs_d(LOG, FMT) occam_current_logs(LOG, OCCAM_LOG_LEVEL_DEBUG, FMT)
+#define occam_logs_i(LOG, FMT) occam_current_logs(LOG, OCCAM_LOG_LEVEL_INFO,  FMT)
+#define occam_logs_w(LOG, FMT) occam_current_logs(LOG, OCCAM_LOG_LEVEL_WARN,  FMT)
+#define occam_logs_e(LOG, FMT) occam_current_logs(LOG, OCCAM_LOG_LEVEL_ERROR, FMT)
 
 #define occam_log_level_name(LVL) (_occam_log_level_name[LVL])
